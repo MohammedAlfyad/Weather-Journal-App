@@ -1,5 +1,5 @@
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
 
 const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
 const apiKey = ",&appid=d24bf70d6dae818a6893be61edd0ae3c&units=metric";
@@ -25,12 +25,14 @@ const generateData = () => {
         feelings,
       };
 
-      postData(server + "/add", info);
+      postData(server + "/add", info).then(function () {
+        updatingUI()
+      })
 
-      updatingUI();
+      
       document.getElementById('entry').style.opacity = 1;
     }
-  });
+  })
 };
 
 document.getElementById("generate").addEventListener("click", generateData);
